@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,8 +34,6 @@ public class ArduinoClientActivity extends Activity {
     private final static String DATA_EXTRA = "primavera.arduino.intent.extra.DATA";
     private final static byte[] DATA = {0x48,0x65,0x6c,0x6c,0x6f,0x20,0x77,0x6f,0x72,0x6c,0x64,0x21};
 
-    private final static String TAG = "ArduinoClientActivity";
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +45,6 @@ public class ArduinoClientActivity extends Activity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 final String action = intent.getAction();
-                Log.d(TAG, "onReceive() " + action);
                 if (DATA_RECEIVED_INTENT.equals(action)) {
                     final byte[] data = intent.getByteArrayExtra(DATA_EXTRA);
                     Toast.makeText(context, new String(data), Toast.LENGTH_SHORT).show();
@@ -58,7 +54,6 @@ public class ArduinoClientActivity extends Activity {
     }
 
     public void sendDataPressed(View view) {
-        Log.d(TAG, "sendDataPressed()");
         Intent intent = new Intent(SEND_DATA_INTENT);
         intent.putExtra(DATA_EXTRA, DATA);
         sendBroadcast(intent);
