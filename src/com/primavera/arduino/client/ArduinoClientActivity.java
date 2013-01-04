@@ -33,6 +33,8 @@ public class ArduinoClientActivity extends Activity {
     private final static String DATA_RECEIVED_INTENT = "primavera.arduino.intent.action.DATA_RECEIVED";
     private final static String SEND_DATA_INTENT = "primavera.arduino.intent.action.SEND_DATA";
     private final static String DATA_EXTRA = "primavera.arduino.intent.extra.DATA";
+    private final static byte[] DATA = {0x48,0x65,0x6c,0x6c,0x6f,0x20,0x77,0x6f,0x72,0x6c,0x64,0x21};
+
     private final static String TAG = "ArduinoClientActivity";
 
     @Override
@@ -56,10 +58,9 @@ public class ArduinoClientActivity extends Activity {
     }
 
     public void sendDataPressed(View view) {
-        Log.d(TAG, "onClick()");
-        final byte[] data = {0x48,0x65,0x6c,0x6c,0x6f,0x20,0x77,0x6f,0x72,0x6c,0x64,0x21};
+        Log.d(TAG, "sendDataPressed()");
         Intent intent = new Intent(SEND_DATA_INTENT);
-        intent.putExtra(DATA_EXTRA, data);
+        intent.putExtra(DATA_EXTRA, DATA);
         sendBroadcast(intent);
     }
 
@@ -79,5 +80,4 @@ public class ArduinoClientActivity extends Activity {
             return super.onOptionsItemSelected(item);
         }
     }
-
 }
